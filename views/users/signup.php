@@ -17,7 +17,7 @@
         <h2>Welcome to GlobalChat!</h2>
         <!-- <h4>Chào mừng các bạn đến với hệ thống hỏi đáp về HUST ELITECH</h4> -->
     </div>
-    <div class="container" id="container">
+    <div class="container right-panel-active" id="container">
         <div class="form-container sign-up-container">
             <form id="formSignUp" method="post" action="index.php?controller=users&action=signup">
                 <h1>Create Account</h1>
@@ -50,10 +50,9 @@
             </div>
         </div>
     </div>
-    <!-- <script src="~/js/lib/jquery-3.4.1.js"></script>
-    <script src="~/js/lib/jquery-ui.js"></script>
-    <script src="~/js/common/common.js"></script>
-    <script src="~/js/View/config.js"></script>
-    <script src="~/js/login_scripts.js"></script> -->
+    <script src="assets/javascripts/lib/jquery-3.4.1.js"></script>
+    <script src="assets/javascripts/lib/jquery-ui.js"></script>
+    <script src="assets/javascripts/common/common.js"></script>
+    <script src="assets/javascripts/signup_scripts.js"></script>
 </body>
 </html>
