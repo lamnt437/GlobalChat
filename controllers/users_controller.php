@@ -59,7 +59,10 @@ class UsersController extends BaseController
                 if($found){
                     $status = "OK";
                     session_start();
+                    $result = User::findByUsername($user_name);
                     $_SESSION['user_name'] = $user_name;
+                    $_SESSION['user_id'] = $result['user_id'];
+                    $_SESSION['full_name'] = $result['full_name'];
                     header("Location: index.php?controller=pages&action=home");
                 }
                 else
@@ -77,7 +80,7 @@ class UsersController extends BaseController
 
     public function logout(){
         session_start();
-        unset($_SESSION['user_name']);
+        session_destroy();
         header("Location: index.php?controller=users&action=login");
     }
 }

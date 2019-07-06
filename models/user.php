@@ -61,5 +61,23 @@ class User{
 
         return $status;
     }
+
+    public static function findByUsername($user_name){
+        $pdo = new PDO("pgsql:host=localhost;port=5432;dbname=GlobalChatDB;user=postgres;password=123456");
+        $pdo->exec("SET NAMES 'utf8'");
+
+        $sql = 'select * from user_tb where user_name = :user_name';
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':user_name', $user_name, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($result !== false)
+            return $result;
+        else
+            return null;
+    }
 }
 ?>
