@@ -1,6 +1,7 @@
 <?php
-require_once('controllers/base_controller.php');
-require_once('models/chat.php');
+require_once('/opt/lampp/htdocs/mvc/chat/template/controllers/base_controller.php');
+require_once('/opt/lampp/htdocs/mvc/chat/template/models/chat.php');
+require_once('/opt/lampp/htdocs/mvc/chat/template/models/tag.php');
 
 
 class PagesController extends BaseController
@@ -17,6 +18,7 @@ class PagesController extends BaseController
     if (isset($_POST['message'])) {
       // check for empty field
       $message_content = $_POST['message'];
+      $hashtag_name = $_POST['hashtag_name'];
       if (empty($message_content)) {
         $status = "Empty message";
       }
@@ -25,19 +27,28 @@ class PagesController extends BaseController
         $user_id = $_SESSION['user_id'];
         $mess_time = date("Y-m-d h:i:sa");
 
-        CHAT::addMessage($user_id, $message_content, $mess_time);
+        CHAT::addMessage($user_id, $message_content, $mess_time, $hashtag_name);
         
         $status = "Message added";
       }
     }
 
     $messages = Chat::findAll();
+    $hashtags = Tag::findAll();
 
     $data = array(
       'messages' => $messages,
+      'hashtags' => $hashtags,
       'status' => $status
     );
     $this->render('home', $data);
+
+    // return $data;  // for test controller
+  }
+
+  public function group()
+  {
+    
   }
 
   public function error()
