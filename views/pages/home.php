@@ -7,6 +7,7 @@
 	  <link href="assets/stylesheets/lib/bootstrap.css" rel="stylesheet" />
 	  <link href="assets/stylesheets/question_styles.css" rel="stylesheet" />
 	  <link href="assets/stylesheets/news.css" rel="stylesheet" />
+	  <link href="assets/stylesheets/common.css" rel="stylesheet" />
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -21,12 +22,12 @@
 	                <a class="navbar-brand">
 	                    GlobalChat
 	                    <!-- @*<img src="~/images/logo.png" class="logo" alt="Curiox" />*@ -->
-	                </a>
+	                </a><link href="assets/stylesheets/news.css" rel="stylesheet" />
 	            </div>
 	            <div class="navbar-collapse collapse">
 	                <!-- @*navigation bar*@ -->
 	                <ul class="nav navbar-nav">
-	                    <li><a>Home</a></li>
+	                    <li><a href="index.php?controller=pages&action=home">Home</a></li>
 	                    <li><a>about</a></li>
 	                    <li><a>contact</a></li>
 	                    <li><a>news</a></li>
@@ -117,7 +118,7 @@
 		                <div class="question-content">
 		                    <div>
 		                        <div>
-		                            <h1 class="question-content-text"><?php echo $hashtag_name; ?></h1>
+		                            <h1 class="question-content-text">GLOBAL</h1>
 		                            <!-- <div>
 		                                <p style="font-size:1.1em">
 		                                    
@@ -140,17 +141,29 @@
 		                  $full_name = $message_obj->full_name;
 		                  $message = $message_obj->message;
 		                  $mess_time = $message_obj->mess_time;
-		                  $message_id = $message_obj->message_id;
+						  $message_id = $message_obj->message_id;
+						  $hashtag_names = $message_obj->hashtag_names;
 
-		                  echo "<div class=\"page-header\">
+						  	echo 
+						    "<div class=\"page-header\">
 		                        <h3><strong class=\"answer-author\"> $message </strong></h3>
 		                        <div class=\"poster\">
 		                          <small>Answered on $mess_time</small>
 		                        </div>
 		                        <p class=\"anwser-content\">
 		                        Message by $full_name
-		                        </p>
-		                    </div>";
+								</p>";
+
+							foreach($hashtag_names as $hashtag_name){
+								echo
+								"<div class=\"topic-bar\">
+									<div class=\"topic-tag\">
+										<a href=\"#\">$hashtag_name</a>
+									</div>
+								</div>";
+							}
+							
+							echo "</div>";
 		                }
 		                ?>
 		                <!--Answer box-->
@@ -187,9 +200,12 @@
                                     <label><h3><strong>Your Message</strong></h3></label>
                                     <textarea id="contentAnswer" class="form-control" placeholder="Enter your answer" rows="4" name="message"></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <input type="submit" name="submit-answer-btn" value="Submit" id="btnSubmit" class="btn" />
-                                </div>
+								<div class="form-group">
+									<input type="text" name="hashtag_name" class="form-control" placeholder="#Hashtag"/>
+								</div>
+								<div class="form-group">
+									<input type="submit" name="submit-answer-btn" value="Submit" id="btnSubmit" class="btn" />
+								</div>
                             </form>
                         </div>
 		            </div>

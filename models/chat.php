@@ -6,14 +6,19 @@ class Chat {
     public static function findAll(){
         $pdo = new PDO("pgsql:host=localhost;port=5432;dbname=GlobalChatDB;user=postgres;password=123456");
         
-        $sql = "select * from user_tb natural join chat_tb natural join tag_tb natural join hashtag_tb";        
+        // get all messages
+        $sql = "select * from user_tb natural join chat_tb";        
         $stmt = $pdo->prepare($sql);        
         $stmt->execute();        
         $messages = array();
 
         while (($result = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+            // get all hashtags associated with current message
+            $message_id = $result['message_id'];
+            $hashtag_names = Tag::findByMessageId($message_id);
+
             $message = new Message($result['message_id'], $result['user_name'],
-            $result['full_name'], $result['message'], $result['mess_time'], $result['hashtag_name']);
+            $result['full_name'], $result['message'], $result['mess_time'], $hashtag_names);
 
             array_push($messages, $message);
         }
@@ -71,7 +76,7 @@ class Chat {
         return $messages;
     }
 
-    public static function addMessage($user_id, $message, $mess_time, $hashtag_name){
+    public static function addMessage($user_id, $message, $mess_time, $hashtag_input){
         $pdo = new PDO("pgsql:host=localhost;port=5432;dbname=GlobalChatDB;user=postgres;password=123456");
 
         // insert message
@@ -89,16 +94,21 @@ class Chat {
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $message_id = $result['message_id'];
-        
-        // insert hashtag
-        // db will reject if hashtag is duplicated
-        Tag::addHashtag($hashtag_name);
-        
-        // get hashtag_id
-        $hashtag_id = Tag::findIdByName($hashtag_name);
 
-        // insert to tag_tb
-        Tag::addTagRel($message_id, $hashtag_id);
+        // explode hashtag_input
+        $hashtag_names = explode(" ", $hashtag_input);
+
+        foreach($hashtag_names as $hashtag_name) {
+            // insert hashtag
+            // db will reject if hashtag is duplicated
+            Tag::addHashtag($hashtag_name);
+            
+            // get hashtag_id
+            $hashtag_id = Tag::findIdByName($hashtag_name);
+
+            // insert to tag_tb
+            Tag::addTagRel($message_id, $hashtag_id);
+        }
     }
 }
 ?>

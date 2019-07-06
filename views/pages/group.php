@@ -25,7 +25,7 @@
             <div class="navbar-collapse collapse">
                 <!-- @*navigation bar*@ -->
                 <ul class="nav navbar-nav">
-                    <li><a>Home</a></li>
+                    <li><a href="index.php?controller=pages&action=home">Home</a></li>
                     <li><a>about</a></li>
                     <li><a>contact</a></li>
                     <li><a>news</a></li>
@@ -70,7 +70,7 @@
                 <div class="question-content">
                     <div>
                         <div>
-                            <h1 class="question-content-text"><?php echo $hashtag_name; ?></h1>
+                            <h1 class="question-content-text"><?php echo '#' . $hashtag_name; ?></h1>
                             <!-- <div>
                                 <p style="font-size:1.1em">
                                     

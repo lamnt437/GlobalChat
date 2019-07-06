@@ -21,16 +21,19 @@ class PagesController extends BaseController
     if (isset($_POST['message'])) {
       // check for empty field
       $message_content = $_POST['message'];
-      $hashtag_name = $_POST['hashtag_name'];
+      $hashtag_input = $_POST['hashtag_name'];
       if (empty($message_content)) {
         $status = "Empty message";
       }
       // insert
       else{
+        if(empty($hashtag_input))
+          $hashtag_input = "general";
+
         $user_id = $_SESSION['user_id'];
         $mess_time = date("Y-m-d h:i:sa");
 
-        CHAT::addMessage($user_id, $message_content, $mess_time, $hashtag_name);
+        CHAT::addMessage($user_id, $message_content, $mess_time, $hashtag_input);
         
         $status = "Message added";
       }
@@ -42,7 +45,7 @@ class PagesController extends BaseController
     $data = array(
       'messages' => $messages,
       'hashtags' => $hashtags,
-      'status' => $status
+      // 'status' => $status
     );
     $this->render('home', $data);
 

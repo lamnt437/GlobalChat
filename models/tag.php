@@ -40,6 +40,8 @@ class Tag {
     public static function findIdByName($hashtag_name){
         $pdo = new PDO("pgsql:host=localhost;port=5432;dbname=GlobalChatDB;user=postgres;password=123456");
         // get hashtag_id
+        $hashtag_name = strtoupper($hashtag_name);
+
         $sql = "SELECT hashtag_id FROM hashtag_tb WHERE hashtag_name = :hashtag_name";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
@@ -48,6 +50,23 @@ class Tag {
         $hashtag_id = $result['hashtag_id'];
 
         return $hashtag_id;
+    }
+
+    public static function findByMessageId($message_id){
+        $pdo = new PDO("pgsql:host=localhost;port=5432;dbname=GlobalChatDB;user=postgres;password=123456");
+        // get all hashtags associated with current message
+        $sql = "select * from chat_tb natural join tag_tb natural join hashtag_tb where tag_tb.message_id = :message_id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':message_id', $message_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $hashtag_names = array();
+
+        while (($result = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+            $hashtag_name = $result['hashtag_name'];
+            array_push($hashtag_names, $hashtag_name);
+        }
+
+        return $hashtag_names;
     }
 
     public static function addHashtag($hashtag_name){
