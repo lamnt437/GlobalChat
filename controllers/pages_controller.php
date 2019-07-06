@@ -62,9 +62,11 @@ class PagesController extends BaseController
     $hashtag_id = $_GET['hashtag_id'];
 
     $messages = Chat::findByHashtagId($hashtag_id);
+    $hashtag_name = Tag::findNameById($hashtag_id);
 
     $data = array(
       'messages' => $messages,
+      'hashtag_name' => $hashtag_name,
       'status' => $status
     );
 
