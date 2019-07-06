@@ -15,6 +15,9 @@ class PagesController extends BaseController
   {
     session_start();
 
+    if(!isset($_SESSION['user_name']))
+      header('Location: index.php?controller=users&action=login');
+
     if (isset($_POST['message'])) {
       // check for empty field
       $message_content = $_POST['message'];
@@ -48,7 +51,24 @@ class PagesController extends BaseController
 
   public function group()
   {
-    
+    session_start();
+
+    if(!isset($_SESSION['user_name']))
+      header('Location: index.php?controller=users&action=login');
+
+    if(!isset($_GET['hashtag_id']))
+      header('Location: index.php?controller=pages&action=home');
+
+    $hashtag_id = $_GET['hashtag_id'];
+
+    $messages = Chat::findByHashtagId($hashtag_id);
+
+    $data = array(
+      'messages' => $messages,
+      'status' => $status
+    );
+
+    $this->render('group', $data);
   }
 
   public function error()
