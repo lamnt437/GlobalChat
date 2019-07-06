@@ -14,3 +14,10 @@ CREATE TABLE tag_tb (
     foreign key(message_id) references chat_tb(message_id) ON DELETE CASCADE,
     foreign key(hashtag_id) references hashtag_tb(hashtag_id) ON DELETE CASCADE
 )
+
+-- get by hashtag
+SELECT *
+FROM user_tb, chat_tb, tag_tb, hashtag_tb
+WHERE user_tb.user_id = chat_tb.user_id
+AND chat_tb.message_id = tag_tb.message_id
+AND tag_tb.hashtag_id = hashtag_tb.hashtag_id

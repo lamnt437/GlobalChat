@@ -1,5 +1,6 @@
 <?php
     include('/opt/lampp/htdocs/mvc/chat/template/models/chat.php');
 
-    Chat::findAll();
+    $messages = Chat::findAll();
+    print_r($messages);
 ?>
