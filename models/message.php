@@ -5,6 +5,7 @@ class Message {
     public $full_name;
     public $message;
     public $mess_time; 
+    public $hashtag;
 
     public function __construct($message_id, $user_name,
     $full_name, $message, $mess_time){
@@ -13,6 +14,7 @@ class Message {
         $this->full_name = $full_name;
         $this->message = $message;
         $this->mess_time = $mess_time;
+        $this->hashtag = $hashtag;
     }
 }
 ?>
