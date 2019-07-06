@@ -1,5 +1,6 @@
 <?php
 require_once('/opt/lampp/htdocs/mvc/chat/template/models/message.php');
+require_once('/opt/lampp/htdocs/mvc/chat/template/models/tag.php');
 
 class Chat {
     public static function findAll(){
@@ -91,25 +92,13 @@ class Chat {
         
         // insert hashtag
         // db will reject if hashtag is duplicated
-        $sql = "INSERT INTO hashtag_tb(hashtag_name) VALUES(:hashtag_name)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
-        $stmt->execute();
+        Tag::addHashtag($hashtag_name);
         
         // get hashtag_id
-        $sql = "SELECT hashtag_id FROM hashtag_tb WHERE hashtag_name = :hashtag_name";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $hashtag_id = $result['hashtag_id'];
+        $hashtag_id = Tag::findIdByName($hashtag_name);
 
         // insert to tag_tb
-        $sql = "INSERT INTO tag_tb(message_id, hashtag_id) VALUES(:message_id, :hashtag_id)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':message_id', $message_id, PDO::PARAM_STR);
-        $stmt->bindParam(':hashtag_id', $hashtag_id, PDO::PARAM_STR);
-        $stmt->execute();
+        Tag::addTagRel($message_id, $hashtag_id);
     }
 }
 ?>
