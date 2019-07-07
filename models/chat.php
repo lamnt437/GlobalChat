@@ -1,6 +1,6 @@
 <?php
-require_once('/opt/lampp/htdocs/mvc/chat/template/models/message.php');
-require_once('/opt/lampp/htdocs/mvc/chat/template/models/tag.php');
+require_once('models/message.php');
+require_once('models/tag.php');
 
 class Chat {
     public static function findAll(){

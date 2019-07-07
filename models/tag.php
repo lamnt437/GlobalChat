@@ -1,6 +1,6 @@
 <?php
 
-require_once('/opt/lampp/htdocs/mvc/chat/template/models/hashtag.php');
+require_once('models/hashtag.php');
 
 class Tag {
     public static function findAll() {
