@@ -1,7 +1,7 @@
 <?php
-require_once('/opt/lampp/htdocs/mvc/chat/template/controllers/base_controller.php');
-require_once('/opt/lampp/htdocs/mvc/chat/template/models/chat.php');
-require_once('/opt/lampp/htdocs/mvc/chat/template/models/tag.php');
+require_once('controllers/base_controller.php');
+require_once('models/chat.php');
+require_once('models/tag.php');
 
 
 class PagesController extends BaseController
