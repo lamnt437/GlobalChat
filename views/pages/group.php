@@ -6,6 +6,7 @@
   <link href="assets/stylesheets/lib/jquery-ui.css" rel="stylesheet" />
   <link href="assets/stylesheets/lib/bootstrap.css" rel="stylesheet" />
   <link href="assets/stylesheets/question_styles.css" rel="stylesheet" />
+  <link href="assets/stylesheets/common.css" rel="stylesheet" />
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -29,7 +30,10 @@
                     <li><a>about</a></li>
                     <li><a>contact</a></li>
                     <li><a>news</a></li>
-                    <li><a href="index.php?controller=users&action=logout">logout</a></li>
+                </ul>
+                <ul class="nav navbar-nav nav-right">
+                    <li><a class="show-name" href="#"><?php echo $_SESSION['full_name']?></a></li>
+                    <li><a class="btn btn-danger" href="index.php?controller=users&action=logout">logout</a></li>
                 </ul>
                 <!-- @*end nav bar*@ -->
                 <!-- @*search bar*@
@@ -54,7 +58,8 @@
         </div>
 </nav>
     <div class="row">
-        <div id="main-section" class="col-md-10 col-md-offset-1">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 hidden-xs hidden-sm" style="height: 100%;"></div>
+        <div id="main-section" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div><?php echo $status?></div>
 
             <div class="question-container page-header">
@@ -134,6 +139,7 @@
                 </div> -->
             </div>
         </div>
+        <div class="col-xs-0 col-sm-0 col-md-3 col-lg-3" style="height: 100%;"></div>
 
         <!-- <div class="" id="confirm-box">
             <div class="d-flex">

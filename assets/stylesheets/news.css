@@ -7,6 +7,21 @@ body {
     color: #000;
 }
 
+#main-section {
+    margin-top: 50px;
+}
+
+#side-chatbox {
+    position: fixed;
+    right: 130px;
+    background-color: #fff;
+    width: 200px;
+    right: auto;
+    height: 100%;
+    z-index: 100;
+    margin-top: 20px;
+}
+
 .label-item:hover {
     color: #3498db;
 }
@@ -153,8 +168,8 @@ a.question-link {
     }
 
 .main-nav {
-    position: fixed;
-    left: 130px;
+    position: absolute;
+    left: 30px;
     background-color: #fff;
     width: 200px;
     right: auto;

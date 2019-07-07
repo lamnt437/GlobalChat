@@ -31,8 +31,11 @@
 	                    <li><a>about</a></li>
 	                    <li><a>contact</a></li>
 	                    <li><a>news</a></li>
-	                    <li><a href="index.php?controller=users&action=logout">logout</a></li>
 	                </ul>
+					<ul class="nav navbar-nav nav-right">
+						<li><a class="show-name" href="#"><?php echo $_SESSION['full_name']?></a></li>
+						<li><a class="btn btn-danger" href="index.php?controller=users&action=logout">logout</a></li>
+					</ul>
 	                <!-- @*end nav bar*@ -->
 	                <!-- @*search bar*@
 	                @*<form class="navbar-form navbar-left" action="/action_page.php">
@@ -55,7 +58,7 @@
 	            </div>
 	        </div>
 		</nav>
-		<div class="container">
+		<div id="main-section" class="container">
 	        <div class="row">
 	            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 hidden-xs hidden-sm" style="height: 100%;">
 	                <div class="news-category main-nav">
@@ -194,24 +197,24 @@
 		                </div> -->
                         <!--Answer box-->
                         <hr>
-                        <div class="form-container">
-                            <form method="post" action="index.php?controller=pages&action=home">
-                                <div class="form-group">
-                                    <label><h3><strong>Your Message</strong></h3></label>
-                                    <textarea id="contentAnswer" class="form-control" placeholder="Enter your answer" rows="4" name="message"></textarea>
-                                </div>
-								<div class="form-group">
-									<input type="text" name="hashtag_name" class="form-control" placeholder="#Hashtag"/>
-								</div>
-								<div class="form-group">
-									<input type="submit" name="submit-answer-btn" value="Submit" id="btnSubmit" class="btn" />
-								</div>
-                            </form>
-                        </div>
+                        
 		            </div>
 	            </div>
 	            <div class="col-xs-0 col-sm-0 col-md-3 col-lg-3" style="height: 100%;">
-
+					<div id="side-chatbox" class="form-container">
+						<form method="post" action="index.php?controller=pages&action=home">
+							<div class="form-group">
+								<label><h3><strong>Your Message</strong></h3></label>
+								<textarea id="contentAnswer" class="form-control" placeholder="Enter your answer" rows="4" name="message"></textarea>
+							</div>
+							<div class="form-group">
+								<input type="text" name="hashtag_name" class="form-control" placeholder="#Hashtag"/>
+							</div>
+							<div class="form-group">
+								<input type="submit" name="submit-answer-btn" value="Submit" id="btnSubmit" class="btn" />
+							</div>
+						</form>
+					</div>
 	            </div>
 	        </div>
 	    </div>
