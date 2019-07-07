@@ -23,6 +23,8 @@ class Chat {
             array_push($messages, $message);
         }
 
+        $messages = array_reverse($messages);
+
         return $messages;
     }
 
