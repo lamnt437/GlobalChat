@@ -103,7 +103,7 @@
                   echo "<div class=\"page-header\">
                         <h3><strong class=\"answer-author\"> $message </strong></h3>
                         <div class=\"poster\">
-                          <small>Answered on $mess_time</small>
+                          <small>on $mess_time</small>
                         </div>
                         <p class=\"anwser-content\">
                         Message by $full_name

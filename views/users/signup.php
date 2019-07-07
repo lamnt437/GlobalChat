@@ -11,7 +11,7 @@
 </head>
 <body>
     <div>
-        <?php echo $status ?>
+        <?php if(!empty($status)) echo $status; ?>
     </div>
     <div id="label-welcome">
         <h2>Welcome to GlobalChat!</h2>
